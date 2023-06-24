@@ -20,35 +20,53 @@ function openProjectPage(index) {
   const project = projects[index];
 
   const projectPage = document.createElement("div");
+  projectPage.id = "project-page";
   projectPage.innerHTML = `
     <h2>${project.title}</h2>
     <img src="${project.image}" alt="${project.title}">
     <p>${project.pageContent}</p>
+    <div id="home-button">
+      <a href="#">Back to Home</a>
+    </div>
   `;
 
   document.body.innerHTML = '';
   document.body.appendChild(projectPage);
+
+  const homeButton = document.getElementById("home-button");
+  homeButton.addEventListener("click", () => {
+    location.reload(); // Reload the page to go back to the landing page
+  });
 }
 
 projects.forEach((project, index) => {
-  const projectItem = document.createElement("div");
-  projectItem.classList.add("project-item");
+  const projectSnapshot = document.createElement("div");
+  projectSnapshot.classList.add("project-snapshot");
 
   const projectTitle = document.createElement("h3");
   projectTitle.textContent = project.title;
-  projectItem.appendChild(projectTitle);
+  projectSnapshot.appendChild(projectTitle);
 
   const projectImage = document.createElement("img");
   projectImage.src = project.image;
-  projectItem.appendChild(projectImage);
+  projectSnapshot.appendChild(projectImage);
 
   const projectDescription = document.createElement("p");
   projectDescription.textContent = project.description;
-  projectItem.appendChild(projectDescription);
+  projectSnapshot.appendChild(projectDescription);
 
-  projectItem.addEventListener("click", () => {
+  projectSnapshot.addEventListener("click", () => {
     openProjectPage(index);
   });
 
-  projectList.appendChild(projectItem);
+  projectList.appendChild(projectSnapshot);
+});
+
+// Add moving shapes
+document.addEventListener("mousemove", (event) => {
+  const shape = document.createElement("div");
+  shape.classList.add("shape");
+  shape.style.top = `${event.clientY}px`;
+  shape.style.left = `${event.clientX}px`;
+  document.body.appendChild(shape);
 });
