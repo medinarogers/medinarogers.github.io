@@ -16,6 +16,20 @@ const projects = [
 
 const projectList = document.getElementById("project-list");
 
+function openProjectPage(index) {
+  const project = projects[index];
+
+  const projectPage = document.createElement("div");
+  projectPage.innerHTML = `
+    <h2>${project.title}</h2>
+    <img src="${project.image}" alt="${project.title}">
+    <p>${project.pageContent}</p>
+  `;
+
+  document.body.innerHTML = '';
+  document.body.appendChild(projectPage);
+}
+
 projects.forEach((project, index) => {
   const projectItem = document.createElement("div");
   projectItem.classList.add("project-item");
@@ -38,13 +52,3 @@ projects.forEach((project, index) => {
 
   projectList.appendChild(projectItem);
 });
-
-function openProjectPage(index) {
-  const project = projects[index];
-
-  const projectPage = document.createElement("div");
-  projectPage.innerHTML = `
-    <h2>${project.title}</h2>
-    <img src="${project.image}" alt="${project.title}">
-    <p>${project.pageContent}</p>
-    <
